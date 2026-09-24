@@ -1,0 +1,17 @@
+package com.aitchn.prism.api.protection;
+
+public enum ProtectionAction {
+    PLACE_CUSTOM_BLOCK,
+    BREAK_CUSTOM_BLOCK,
+    INTERACT_CUSTOM_BLOCK,
+    FORM_STRUCTURE,
+    USE_STRUCTURE,
+    MODIFY_STRUCTURE,
+    MACHINE_INPUT,
+    MACHINE_OUTPUT,
+    AREA_BREAK,
+    ENVIRONMENTAL_DAMAGE,
+    PLACE_CONDUIT,
+    BREAK_CONDUIT,
+    TRANSFORM_BLOCK
+}

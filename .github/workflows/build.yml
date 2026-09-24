@@ -44,4 +44,9 @@ jobs:
           GH_TOKEN: ${{ github.token }}
           GH_REPO: ${{ github.repository }}
           TAG: ${{ github.ref_name }}
-        run: gh release create "$TAG" dist/*.jar --verify-tag --title "Prism API $TAG" --generate-notes
+        run: |
+          if [[ "$TAG" == *-* ]]; then
+            gh release create "$TAG" dist/*.jar --verify-tag --title "Prism API $TAG" --generate-notes --prerelease
+          else
+            gh release create "$TAG" dist/*.jar --verify-tag --title "Prism API $TAG" --generate-notes
+          fi

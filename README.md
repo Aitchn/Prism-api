@@ -1,4 +1,4 @@
-# Prism API
+# Prism API (0.9.61 preview)
 
 The public Java API for writing addons for the Prism Minecraft plugin. This repository contains only the `com.aitchn.prism.api` source and contract tests, its build files, and addon-facing documentation. It does not contain Prism's implementation or a server plugin.
 
@@ -26,7 +26,7 @@ repositories {
 }
 
 dependencies {
-    compileOnly(files("libs/Prism-api-3.21.jar"))
+    compileOnly(files("libs/Prism-api-3.23.jar"))
     compileOnly("dev.folia:folia-api:26.2.build.5-beta")
 }
 
@@ -56,8 +56,8 @@ public final class ExampleAddon extends JavaPlugin {
                 getServer().getServicesManager().load(PrismApi.class),
                 "Prism API is unavailable"
         );
-        if (!prism.supports(3, 21)) {
-            throw new IllegalStateException("Prism API 3.21 or newer is required");
+        if (!prism.supports(3, 23)) {
+            throw new IllegalStateException("Prism API 3.23 or newer is required");
         }
         prism.structureBehaviors().register(
                 this,

@@ -3,7 +3,7 @@ plugins {
 }
 
 group = "com.aitchn"
-version = "3.21"
+version = "3.23"
 
 repositories {
     mavenCentral()

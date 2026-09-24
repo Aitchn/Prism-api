@@ -14,7 +14,8 @@ public record ItemBehaviorRegistryValidationContext(
         Set<PrismKey> registeredItems,
         BehaviorOptions options,
         Map<PrismKey, List<ComponentDefinition>> itemComponents,
-        List<com.aitchn.prism.api.behavior.BehaviorDefinition> behaviors
+        List<com.aitchn.prism.api.behavior.BehaviorDefinition> behaviors,
+        Map<PrismKey, List<ItemPlacementTarget>> placementTargets
 ) {
     public ItemBehaviorRegistryValidationContext {
         Objects.requireNonNull(itemId, "itemId");
@@ -23,6 +24,14 @@ public record ItemBehaviorRegistryValidationContext(
         itemComponents = itemComponents.entrySet().stream().collect(java.util.stream.Collectors.toUnmodifiableMap(
                 Map.Entry::getKey, entry -> List.copyOf(entry.getValue())));
         behaviors = List.copyOf(behaviors);
+        placementTargets = placementTargets.entrySet().stream().collect(java.util.stream.Collectors.toUnmodifiableMap(
+                Map.Entry::getKey, entry -> List.copyOf(entry.getValue())));
+    }
+
+    public ItemBehaviorRegistryValidationContext(PrismKey itemId, Set<PrismKey> registeredItems, BehaviorOptions options,
+                                                Map<PrismKey, List<ComponentDefinition>> itemComponents,
+                                                List<com.aitchn.prism.api.behavior.BehaviorDefinition> behaviors) {
+        this(itemId, registeredItems, options, itemComponents, behaviors, Map.of());
     }
 
     public ItemBehaviorRegistryValidationContext(PrismKey itemId, Set<PrismKey> registeredItems, BehaviorOptions options) {

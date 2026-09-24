@@ -25,7 +25,7 @@ import com.aitchn.prism.api.chat.ChatTokenRegistry;
 
 public interface PrismApi {
     int API_MAJOR_VERSION = 3;
-    int API_MINOR_VERSION = 21;
+    int API_MINOR_VERSION = 23;
 
     RegistryView registries();
 

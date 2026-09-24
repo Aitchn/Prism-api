@@ -15,6 +15,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Enforce API-only repository contents
+        shell: bash
+        run: |
+          allowed='^(src/(main|test)/java/com/aitchn/prism/api/.*\.java|\.github/workflows/build\.yml|\.gitattributes|\.gitignore|LICENSE|README\.md|build\.gradle\.kts|settings\.gradle\.kts|gradle/wrapper/gradle-wrapper\.(jar|properties)|gradlew(\.bat)?)$'
+          unexpected=$(git ls-files | grep -Ev "$allowed" || true)
+          if [[ -n "$unexpected" ]]; then
+            printf 'Files outside the public API allowlist:\n%s\n' "$unexpected"
+            exit 1
+          fi
       - uses: actions/setup-java@v4
         with:
           distribution: temurin

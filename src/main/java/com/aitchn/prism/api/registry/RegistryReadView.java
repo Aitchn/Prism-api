@@ -50,6 +50,11 @@ public interface RegistryReadView {
         return List.of();
     }
 
+    /** Immutable presentation bindings, independent of machine inventory and process authority. */
+    default List<ComponentDefinition> machineComponents(PrismKey machine) {
+        return List.of();
+    }
+
     /** Immutable configured bindings only, without executable handler objects. */
     default List<com.aitchn.prism.api.behavior.BehaviorDefinition> blockBehaviors(PrismKey block) {
         return List.of();

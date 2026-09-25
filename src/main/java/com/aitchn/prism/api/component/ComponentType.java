@@ -16,5 +16,8 @@ public record ComponentType(
             throw new IllegalArgumentException("Component types must support at least one target");
         }
         Objects.requireNonNull(facet, "facet");
+        if (targets.contains(ComponentTarget.MACHINE) && facet != ComponentFacet.PRESENTATION) {
+            throw new IllegalArgumentException("Machine components currently support presentation data only");
+        }
     }
 }

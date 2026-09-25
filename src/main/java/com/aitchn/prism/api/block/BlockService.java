@@ -27,7 +27,8 @@ public interface BlockService {
         throw new UnsupportedOperationException("Block ports require API 3.3");
     }
 
-    /** All configurable ports of this machine, including ports exposed on other formed members. */
+    /** Captured configurable machine ports. Legacy relocatable ports include other members;
+     * fixed ports are available only on their declared member roles. */
     default Map<String, BlockPortConfiguration> configurablePorts(Block block) {
         throw new UnsupportedOperationException("Machine port positions require API 3.9");
     }

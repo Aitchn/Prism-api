@@ -40,6 +40,8 @@ class PrismApiVersionTest {
         assertTrue(api.supports(3, 22));
         assertTrue(api.supports(3, 23));
         assertFalse(api.supports(3, 24));
+        assertFalse(api.supports(3, 25));
+        assertFalse(api.supports(3, 26));
         assertFalse(api.supports(2, 10));
         assertFalse(api.supports(4, 0));
     }

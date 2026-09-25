@@ -80,6 +80,10 @@ public interface RegistryView extends RegistryReadView {
         return snapshot().blockComponents(block);
     }
 
+    default List<ComponentDefinition> machineComponents(PrismKey machine) {
+        return snapshot().machineComponents(machine);
+    }
+
     @Override
     default List<com.aitchn.prism.api.behavior.BehaviorDefinition> blockBehaviors(PrismKey block) {
         return snapshot().blockBehaviors(block);

@@ -71,6 +71,11 @@ public interface PrismApi {
 
     ChatTokenRegistry chatTokens();
 
+    /** Experimental online status framework; Prism registers no default effects. */
+    default com.aitchn.prism.api.status.StatusService statuses() {
+        throw new UnsupportedOperationException("This Prism implementation does not provide statuses");
+    }
+
     com.aitchn.prism.api.feedback.FeedbackService feedback();
 
     default boolean supports(int major, int minor) {

@@ -2,5 +2,7 @@ package com.aitchn.prism.api.component;
 
 public enum ComponentTarget {
     ITEM,
-    BLOCK
+    BLOCK,
+    /** Registered presentation data bound to a machine definition, including native controllers. */
+    MACHINE
 }

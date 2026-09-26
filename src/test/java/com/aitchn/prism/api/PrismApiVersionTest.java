@@ -13,7 +13,7 @@ class PrismApiVersionTest {
     void supportsOnlyPublishedNonnegativeApiThreeVersions() {
         PrismApi api = mock(PrismApi.class, CALLS_REAL_METHODS);
         assertEquals(3, PrismApi.API_MAJOR_VERSION);
-        assertEquals(23, PrismApi.API_MINOR_VERSION);
+        assertEquals(24, PrismApi.API_MINOR_VERSION);
         assertTrue(api.supports(3, 0));
         assertFalse(api.supports(3, -1));
         assertTrue(api.supports(3, 1));
@@ -39,7 +39,7 @@ class PrismApiVersionTest {
         assertTrue(api.supports(3, 21));
         assertTrue(api.supports(3, 22));
         assertTrue(api.supports(3, 23));
-        assertFalse(api.supports(3, 24));
+        assertTrue(api.supports(3, 24));
         assertFalse(api.supports(3, 25));
         assertFalse(api.supports(3, 26));
         assertFalse(api.supports(2, 10));

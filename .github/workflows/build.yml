@@ -2,7 +2,7 @@ name: Build API
 
 on:
   push:
-    branches: [main, '0.9.61']
+    branches: [main, '0.9.62']
     tags: ['v*']
   pull_request:
   workflow_dispatch:

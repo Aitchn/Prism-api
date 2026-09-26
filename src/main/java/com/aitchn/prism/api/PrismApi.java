@@ -25,7 +25,7 @@ import com.aitchn.prism.api.chat.ChatTokenRegistry;
 
 public interface PrismApi {
     int API_MAJOR_VERSION = 3;
-    int API_MINOR_VERSION = 23;
+    int API_MINOR_VERSION = 24;
 
     RegistryView registries();
 
@@ -77,6 +77,11 @@ public interface PrismApi {
     }
 
     com.aitchn.prism.api.feedback.FeedbackService feedback();
+
+    /** Assembled equipment queries and the product, trait and statistic registries. */
+    default com.aitchn.prism.api.forging.ForgingService forging() {
+        throw new UnsupportedOperationException("This Prism implementation does not provide forging");
+    }
 
     default boolean supports(int major, int minor) {
         return major == API_MAJOR_VERSION && minor >= 0 && minor <= API_MINOR_VERSION;

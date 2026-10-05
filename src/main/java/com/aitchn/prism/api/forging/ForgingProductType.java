@@ -11,8 +11,8 @@ import java.util.Objects;
  * @param attributes which standard statistic-to-attribute mapping Prism applies
  * @param durable whether the product has logical durability, a native wear counter, tool and weapon components.
  *                A non-durable product never breaks and its parts need not contribute durability
- * @param ammunition whether the product is fired as ammunition; its hit and damage traits are skipped when a
- *                   forged weapon already supplies them for the projectile
+ * @param ammunition whether the product is fired as ammunition; its payload contributes local hit/damage traits
+ *                   at impact and is excluded from the shooter's equipped trait aggregate
  * @param enchantingReference native item whose enchanting rules apply, or {@code null} for none
  * @param toolFamily tool family reported to Prism tool capabilities. A {@code minecraft:<tool>s} item tag also
  *                   grants native {@code minecraft:mineable/<tool>} mining rules; use {@link #EQUIPMENT_FAMILY}

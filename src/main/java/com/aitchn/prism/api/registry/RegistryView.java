@@ -16,6 +16,16 @@ import com.aitchn.prism.api.material.MaterialDefinition;
 public interface RegistryView extends RegistryReadView {
     RegistryReadView snapshot();
 
+    @Override
+    default Optional<StructurePreview> structurePreview(PrismKey id) {
+        return snapshot().structurePreview(id);
+    }
+
+    @Override
+    default Optional<StructurePreview> structurePreview(PrismKey id, int repetitions, int belowController) {
+        return snapshot().structurePreview(id, repetitions, belowController);
+    }
+
     RegistrySubscription subscribe(Plugin owner, RegistryChangeListener listener);
 
     void unsubscribe(Plugin owner);

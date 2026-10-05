@@ -30,6 +30,9 @@ public record MobDefinition(
             if (value == null || !Double.isFinite(value)) {
                 throw new IllegalArgumentException("Mob attribute values must be finite numbers");
             }
+            if (attribute.toString().equals("minecraft:max_health") && (value < 1 || value > 1_000_000)) {
+                throw new IllegalArgumentException("Mob logical maximum health must be in [1, 1000000]");
+            }
         });
         Objects.requireNonNull(controller, "controller");
         configuredBehaviors = List.copyOf(Objects.requireNonNull(configuredBehaviors, "configuredBehaviors"));

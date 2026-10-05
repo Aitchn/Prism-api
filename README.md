@@ -6,11 +6,14 @@ The public Java API for writing addons for the Prism Minecraft plugin. This repo
 
 | Prism server | API source | API artifact |
 | --- | --- | --- |
+| Prism 0.9.63 prerelease | `0.9.63` (not yet tagged) | `3.25` |
 | Prism 0.9.62 | `0.9.62` (not yet tagged) | `3.24` |
 | Prism 0.9.61 | `main`, `0.9.61`, tag `v3.23` | `3.23` |
 | Prism 0.9.60 | tag `v3.21` | `3.21` |
 
 Compile against the API matching the Prism version installed on your server. The constants in [`PrismApi`](src/main/java/com/aitchn/prism/api/PrismApi.java) are authoritative. The older `v3.23-preview.1` tag remains an immutable prerelease snapshot; use `v3.23` for the final 0.9.61 contract.
+
+The 0.9.63 preview mirrors Prism commit `b6c532de8890b09788f78f800d0cf15a2dc47025`. API 3.25 includes camera, music and input contracts. Earlier 3.25 previews can lack later methods, so pin the matching source or artifact as well as checking the API version. Addons requiring music transport and mixer controls must also check `prism.music().supportsPlaybackControls()`; a version match alone does not establish those capabilities. This preview does not include an NBS parser or establish physical client playback acceptance. Prism's `main` remains the stable plugin branch; each numeric branch is its matching release or prerelease snapshot.
 
 ## Build the API JAR
 

@@ -25,6 +25,15 @@ public interface RegistryReadView {
 
     Set<PrismKey> structures();
 
+    /** Minimum-size preview of a committed definition. @since 3.25 */
+    default Optional<StructurePreview> structurePreview(PrismKey id) { return Optional.empty(); }
+
+    /** Expanded using the definition's repetition/controller rules; invalid sizes throw.
+     * Unknown IDs return empty. Capture snapshot() for related reads. @since 3.25 */
+    default Optional<StructurePreview> structurePreview(PrismKey id, int repetitions, int belowController) {
+        return Optional.empty();
+    }
+
     Set<PrismKey> machines();
 
     Set<PrismKey> recipes();

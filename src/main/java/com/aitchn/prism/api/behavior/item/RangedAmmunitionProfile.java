@@ -3,7 +3,12 @@ package com.aitchn.prism.api.behavior.item;
 /** Arrow damage is a projectile contribution, not an additional complete weapon damage value. */
 public record RangedAmmunitionProfile(double damage, int penetration, double spread, double gravity,
                                       double velocityRetention, double speedMultiplier,
-                                      double recoveryChance, boolean fireproof) {
+                                      double recoveryChance, boolean fireproof, AmmunitionDurability durability) {
+    public RangedAmmunitionProfile(double damage, int penetration, double spread, double gravity,
+                                  double velocityRetention, double speedMultiplier, double recoveryChance,
+                                  boolean fireproof) {
+        this(damage, penetration, spread, gravity, velocityRetention, speedMultiplier, recoveryChance, fireproof, null);
+    }
     public RangedAmmunitionProfile {
         if (!Double.isFinite(damage) || damage < 0 || damage > 100 || penetration < 0 || penetration > 127
                 || !Double.isFinite(spread) || spread < 0 || spread > 20

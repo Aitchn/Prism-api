@@ -24,8 +24,27 @@ import com.aitchn.prism.api.fishing.FishingService;
 import com.aitchn.prism.api.chat.ChatTokenRegistry;
 
 public interface PrismApi {
+    /** Shared logical health and opt-in encounter defense for players and mobs. */
+    default com.aitchn.prism.api.combat.CombatService combat() {
+        throw new UnsupportedOperationException("This Prism implementation does not provide combat profiles");
+    }
     int API_MAJOR_VERSION = 3;
-    int API_MINOR_VERSION = 24;
+    int API_MINOR_VERSION = 25;
+
+    /**
+     * Owner-bound semantic input observations; no implicit gameplay capture.
+     * Added in the input-enabled 0.9.63 build of API 3.25. Earlier 3.25 builds lack this method;
+     * addons must check service availability in addition to the API version.
+     * @since 3.25
+     */
+    default com.aitchn.prism.api.input.InputService inputs() {
+        throw new UnsupportedOperationException("This Prism implementation does not provide input observations");
+    }
+
+    /** Explicit addon identity and initialization results. @since 3.25 */
+    default com.aitchn.prism.api.addon.AddonRegistry addons() {
+        throw new UnsupportedOperationException("This Prism implementation does not provide addon status");
+    }
 
     RegistryView registries();
 
@@ -81,6 +100,33 @@ public interface PrismApi {
     /** Assembled equipment queries and the product, trait and statistic registries. */
     default com.aitchn.prism.api.forging.ForgingService forging() {
         throw new UnsupportedOperationException("This Prism implementation does not provide forging");
+    }
+
+    /**
+     * Packet-only hit parts for mobs whose appearance is larger than their native hitbox.
+     *
+     * @since 3.24
+     */
+    default com.aitchn.prism.api.mob.part.MobPartService mobParts() {
+        throw new UnsupportedOperationException("This Prism implementation does not provide mob parts");
+    }
+
+    /**
+     * Server-controlled music played from resource-pack audio.
+     *
+     * @since 3.24
+     */
+    default com.aitchn.prism.api.music.MusicService music() {
+        throw new UnsupportedOperationException("This Prism implementation does not provide music");
+    }
+
+    /**
+     * Server-controlled cameras for Java players: anchored views the player looks around from, and directed shots.
+     *
+     * @since 3.24
+     */
+    default com.aitchn.prism.api.camera.CameraService cameras() {
+        throw new UnsupportedOperationException("This Prism implementation does not provide cameras");
     }
 
     default boolean supports(int major, int minor) {

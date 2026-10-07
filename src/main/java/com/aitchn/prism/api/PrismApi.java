@@ -28,6 +28,20 @@ public interface PrismApi {
     default com.aitchn.prism.api.combat.CombatService combat() {
         throw new UnsupportedOperationException("This Prism implementation does not provide combat profiles");
     }
+    /** Hit-enabled 0.9.63/API 3.25 build; older 3.25 implementations may lack these services. */
+    default com.aitchn.prism.api.hit.HitboxService hitboxes() {
+        throw new UnsupportedOperationException("This Prism implementation does not provide generic hitboxes");
+    }
+    default com.aitchn.prism.api.hit.HitQueryService hitQueries() {
+        throw new UnsupportedOperationException("This Prism implementation does not provide hit queries");
+    }
+    default com.aitchn.prism.api.hit.HitService hits() {
+        throw new UnsupportedOperationException("This Prism implementation does not provide hit transactions");
+    }
+    default com.aitchn.prism.api.projectile.ProjectileService projectiles() {
+        throw new UnsupportedOperationException("This Prism implementation does not provide virtual projectiles");
+    }
+
     int API_MAJOR_VERSION = 3;
     int API_MINOR_VERSION = 25;
 
@@ -77,6 +91,16 @@ public interface PrismApi {
     ProtectionService protections();
 
     ItemService items();
+
+    /**
+     * Stored energy of {@code prism:energy_storage} items. Added in the engine-enabled 0.9.63 build of
+     * API 3.25; earlier 3.25 builds lack this service, so addons must check its availability.
+     *
+     * @since 3.25
+     */
+    default com.aitchn.prism.api.item.EnergyService energy() {
+        throw new UnsupportedOperationException("This Prism implementation does not provide energy items");
+    }
 
     BlockService blocks();
 

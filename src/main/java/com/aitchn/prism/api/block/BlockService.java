@@ -22,7 +22,7 @@ public interface BlockService {
         throw new UnsupportedOperationException("Block ports require API 3.3");
     }
 
-    /** Privileged owning-region operation. Player-facing callers must first check protection and ownership. */
+    /** Owning-region mutation. The core checks providers; legacy calls have UNKNOWN actor attribution. */
     default void configurePort(Block block, String port, BlockSide side, BlockPortMode mode) {
         throw new UnsupportedOperationException("Block ports require API 3.3");
     }
@@ -38,9 +38,35 @@ public interface BlockService {
         throw new UnsupportedOperationException("Machine port positions require API 3.9");
     }
 
-    /** Assign a port to this formed member, or restore declared roles when reset is true. Region-owned and privileged. */
+    /** Assign a port to this formed member, or restore declared roles. Core authorization is required. */
     default void positionPort(Block block, String port, boolean reset) {
         throw new UnsupportedOperationException("Machine port positions require API 3.9");
+    }
+
+    /** Context-aware mutations; the implementation must not downgrade these to a legacy call. */
+    default void place(Block block, PrismKey id, Map<String, String> data, boolean physics,
+                       com.aitchn.prism.api.protection.ProtectionContext context) {
+        restore(block, new BlockSnapshot(id, 1, data), physics, context);
+    }
+
+    default void restore(Block block, BlockSnapshot snapshot, boolean physics,
+                         com.aitchn.prism.api.protection.ProtectionContext context) {
+        throw new UnsupportedOperationException("Action context is unavailable");
+    }
+
+    default Optional<BlockSnapshot> breakBlock(Block block, boolean drops, boolean physics,
+                                                com.aitchn.prism.api.protection.ProtectionContext context) {
+        throw new UnsupportedOperationException("Action context is unavailable");
+    }
+
+    default void configurePort(Block block, String port, BlockSide side, BlockPortMode mode,
+                               com.aitchn.prism.api.protection.ProtectionContext context) {
+        throw new UnsupportedOperationException("Action context is unavailable");
+    }
+
+    default void positionPort(Block block, String port, boolean reset,
+                              com.aitchn.prism.api.protection.ProtectionContext context) {
+        throw new UnsupportedOperationException("Action context is unavailable");
     }
 
     Optional<BlockSnapshot> inspect(Block block);

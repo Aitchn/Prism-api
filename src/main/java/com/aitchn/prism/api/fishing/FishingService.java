@@ -46,6 +46,13 @@ public interface FishingService {
     /** Crafts from the player's current specimen window and consumes one ordinary fish atomically. */
     CompletionStage<SpecimenResult> craftSpecimen(Player player, PrismKey species);
 
+    /** Revalidate an existing deferred UI request on the player owner at the actual commit. */
+    default CompletionStage<SpecimenResult> craftSpecimen(Player player, PrismKey species,
+            java.util.function.BooleanSupplier valid) {
+        return java.util.concurrent.CompletableFuture.failedFuture(
+                new UnsupportedOperationException("Deferred specimen validation is unavailable"));
+    }
+
     /** Select without hook facts. Only unrestricted species are eligible; prefer the environment overload. */
     Optional<FishingSpeciesDefinition> chooseCustomFish(Player player, PrismKey biome, PrismKey ordinaryFish,
                                                         java.util.Random random);

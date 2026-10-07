@@ -5,6 +5,16 @@ import org.bukkit.plugin.Plugin;
 
 /** All entity operations require its Folia owner. Health persists; encounter bindings are session-scoped. */
 public interface CombatService {
+    default void maximumHealth(LivingEntity entity, double maximum,
+                               com.aitchn.prism.api.protection.ProtectionContext context) {
+        throw new UnsupportedOperationException("Action context is unavailable");
+    }
+
+    default void health(LivingEntity entity, double current,
+                        com.aitchn.prism.api.protection.ProtectionContext context) {
+        throw new UnsupportedOperationException("Action context is unavailable");
+    }
+
     HealthSnapshot health(LivingEntity entity);
 
     /** Sets logical base maximum, preserving the current health fraction. Range: 1..1,000,000. */

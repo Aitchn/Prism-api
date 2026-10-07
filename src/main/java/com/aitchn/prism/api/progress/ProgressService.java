@@ -12,9 +12,30 @@ public interface ProgressService {
 
     CompletionStage<ResearchResult> completeResearch(UUID playerId, PrismKey research);
 
+    /** Context-aware mutation. Older providers of this service explicitly reject this new contract. */
+    default CompletionStage<ResearchResult> completeResearch(UUID playerId, PrismKey research,
+            com.aitchn.prism.api.protection.ProtectionContext context) {
+        return java.util.concurrent.CompletableFuture.failedFuture(
+                new UnsupportedOperationException("This ProgressService does not support action context"));
+    }
+
     CompletionStage<PlayerProgressView> revokeResearch(UUID playerId, PrismKey research);
 
+    /** Context-aware mutation. Older providers of this service explicitly reject this new contract. */
+    default CompletionStage<PlayerProgressView> revokeResearch(UUID playerId, PrismKey research,
+            com.aitchn.prism.api.protection.ProtectionContext context) {
+        return java.util.concurrent.CompletableFuture.failedFuture(
+                new UnsupportedOperationException("This ProgressService does not support action context"));
+    }
+
     CompletionStage<PlayerProgressView> incrementCounter(UUID playerId, PrismKey counter, long amount);
+
+    /** Context-aware mutation. Older providers of this service explicitly reject this new contract. */
+    default CompletionStage<PlayerProgressView> incrementCounter(UUID playerId, PrismKey counter, long amount,
+            com.aitchn.prism.api.protection.ProtectionContext context) {
+        return java.util.concurrent.CompletableFuture.failedFuture(
+                new UnsupportedOperationException("This ProgressService does not support action context"));
+    }
 
     void subscribe(Plugin owner, ProgressListener listener);
 

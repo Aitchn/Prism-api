@@ -9,7 +9,19 @@ public interface ItemService {
 
     ItemStack create(PrismKey id, int amount);
 
+    /**
+     * Legacy in-place normalization has no inventory, actor or location. It is not an authorized
+     * world/inventory commit. Use canonicalizedCopy and authorize the actual inventory write.
+     */
+    @Deprecated
     boolean canonicalize(ItemStack stack);
+
+    /** Normalize detached data; the caller must authorize the later inventory commit. */
+    default ItemStack canonicalizedCopy(ItemStack stack) {
+        ItemStack copy = stack.clone();
+        canonicalize(copy);
+        return copy;
+    }
 
     /** Reads supported instance fields using the current immutable content definition. */
     ItemInstanceState state(ItemStack stack);

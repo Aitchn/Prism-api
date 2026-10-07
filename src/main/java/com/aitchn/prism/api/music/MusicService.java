@@ -1,5 +1,10 @@
 package com.aitchn.prism.api.music;
 
+import com.aitchn.prism.api.PrismKey;
+import com.aitchn.prism.api.music.nbs.NbsCue;
+import com.aitchn.prism.api.music.nbs.NbsImport;
+import java.util.concurrent.CompletionStage;
+
 import org.bukkit.plugin.Plugin;
 
 /**
@@ -34,4 +39,30 @@ public interface MusicService {
      * @throws IllegalStateException    for a disabled owner
      */
     MusicPlayback play(Plugin owner, MusicTrack track, String section);
+
+    /** Availability gate for the NBS-enabled API 3.25 build; older implementations return false. */
+    default boolean supportsNbsImport() { return false; }
+
+    /**
+     * Parses and compiles bounded v4/v5 bytes off Folia region/player threads. The byte array is copied before return.
+     * Null cue selects the whole song with four NBS ticks per beat and exact note timing. Other beat grids
+     * or explicitly chosen nearest-tick quantization require a cue; fractional times otherwise reject.
+     * Failed imports never start playback. Completion has no Folia owner context; schedule gameplay explicitly.
+     * NbsException is the stable content failure (inside CompletionException for asynchronous failures).
+     */
+    default CompletionStage<NbsImport> importNbs(
+            PrismKey id, byte[] bytes, NbsCue cue) {
+        throw new UnsupportedOperationException("NBS import is not supported by this implementation");
+    }
+
+    /** Same import pipeline with strict schema-1 cue YAML (at most 65536 characters); parsed asynchronously. */
+    default CompletionStage<NbsImport> importNbsYaml(
+            PrismKey id, byte[] bytes, String cueYaml) {
+        throw new UnsupportedOperationException("NBS cue YAML is not supported by this implementation");
+    }
+
+    /** Uses the existing playback scheduler/controls, honoring imported one-shot section policy. Any thread. */
+    default MusicPlayback playNbs(Plugin owner, NbsImport imported, String section) {
+        throw new UnsupportedOperationException("NBS playback is not supported by this implementation");
+    }
 }
